@@ -29,5 +29,10 @@
         "path": "./snippets/snippets.code-snippets"
       }
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LogiCadi/lks-snippet"
+  },
+  "homepage": "https://github.com/LogiCadi/lks-snippet/blob/master/README.md"
 }

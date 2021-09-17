@@ -1,1 +1,81 @@
-{}
+{
+  // Place your snippets for typescriptreact here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "1号车间报表（report）组件模板页面": {
+    "prefix": "report",
+    "body": [
+      "import { employeeBonusSalarySalaryListExportGET } from '@/api/finance';",
+      "import ExportButton from '@/business-components/export-button';",
+      "import Report, { IColumns, IReportFormItem } from '@/business-components/report';",
+      "import { healthRecordListGET } from '@/models/workshop/api/healthRecord/healthRecordListGET';",
+      "import { HealthArchiveRecordVo } from '@/models/workshop/model/HealthArchiveRecordVo';",
+      "import React, { Component } from 'react';",
+      "",
+      "export interface ${1:$TM_FILENAME_BASE}State {",
+      "  list: HealthArchiveRecordVo[];",
+      "  filter: IReportFormItem[];",
+      "  columns: IColumns<HealthArchiveRecordVo>[];",
+      "}",
+      "",
+      "/** 健康档案 */",
+      "export default class ${1:$TM_FILENAME_BASE} extends Component<any, ${1:$TM_FILENAME_BASE}State> {",
+      "  state: ${1:$TM_FILENAME_BASE}State = {",
+      "    list: [],",
+      "    filter: [",
+      "      {",
+      "        key: ['startTime', 'endTime'],",
+      "        label: '结算时间',",
+      "        type: 'date-range'",
+      "      },",
+      "      {",
+      "        key: 'reportType',",
+      "        label: '上报状态',",
+      "        type: 'select',",
+      "        hasAll: false,",
+      "        list: [",
+      "          { id: '1', value: '未上报' },",
+      "          { id: '2', value: '已上报' },",
+      "          { id: '3', value: '上报失败' }",
+      "        ]",
+      "      },",
+      "      {",
+      "        key: 'keyNameOrCompany',",
+      "        label: '姓名/单位',",
+      "        type: 'input'",
+      "      }",
+      "    ],",
+      "    columns: []",
+      "  };",
+      "",
+      "  reportRef: React.RefObject<Report<HealthArchiveRecordVo>> = React.createRef();",
+      "",
+      "  render() {",
+      "    return (",
+      "      <Report<HealthArchiveRecordVo>",
+      "        ref={this.reportRef}",
+      "        onQuery={(list) => this.setState({ list })}",
+      "        request={(params) => healthRecordListGET(params)}",
+      "        form={this.state.filter}",
+      "        columns={this.state.columns}",
+      "        toolbar={(params) => (",
+      "          <ExportButton request={() => ${2:employeeBonusSalarySalaryListExportGET}(params)} name=\"工资报表.xlsx\" />",
+      "        )}",
+      "      />",
+      "    );",
+      "  }",
+      "}",
+      ""
+    ]
+  }
+}
